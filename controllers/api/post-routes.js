@@ -43,7 +43,7 @@ router.get('/:id', (req,res) => {
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
-        })
+        });
 });
 
 // get all posts for a single user
@@ -69,8 +69,8 @@ router.get('/user/:id', (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
-        })
-})
+        });
+});
 
 // Create a post
 router.post('/', (req, res) => {
@@ -87,6 +87,50 @@ router.post('/', (req, res) => {
         });
 });
 
+// edit post
+router.put('/:id', (req, res) => {
+    Post.update(
+        {...req.body},
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    )
+        .then(dbPostData => {
+            if (!dbPostData) {
+                res.status(404).json({message: 'No post found with that id'});
+                return;
+            }
+            res.json(dbPostData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+// delete post
+router.delete('/:id', (req, res) => {
+    Post.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbPostData => {
+            if(!dbPostData) {
+                res.status(404).json({message: 'No post found with that id'});
+                return;
+            }
+            res.json(dbPostData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+})
+
+// update get one post above to include replies
 
 
 module.exports = router;
