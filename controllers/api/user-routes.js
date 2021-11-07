@@ -55,5 +55,48 @@ router.post('/', (req, res) => {
         });
 });
 
+//login
+router.post('/login', (req, res) => {
+    // expecting json object with {username: 'username', password: 'password123'}
+    User.findOne({
+        where: {
+            username: req.body.username
+        }
+    })
+        .then(dbUserData => {
+            if(!dbUserData) {
+                res.status(404).json({message: 'No user found with that id'});
+                return;
+            }
+
+            const correctPassword = dbUserData.checkPassword(req.body.password);
+            if(!correctPassword) {
+                res.status(400).json({message: 'Wrong credentials'});
+                return;
+            }
+
+            req.session.save(() => {
+                // declare session variables
+                req.session.user_id = dbUserData.id;
+                req.session.username = dbUserData.username;
+                req.session.loggedIn = true;
+    
+                res.json({ user: dbUserData, message: 'You are now logged in!' });
+            });
+        })
+});
+
+// Logout
+router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    }
+    else {
+        res.status(404).end();
+    }
+})
+
 
 module.exports = router;
