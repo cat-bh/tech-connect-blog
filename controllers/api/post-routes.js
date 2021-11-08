@@ -30,6 +30,14 @@ router.get('/:id', (req,res) => {
             {
                 model: User,
                 attributes: ['username']
+            },
+            {
+                model: Reply,
+                attributes: ['body', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
             }
         ]
     })
@@ -129,8 +137,6 @@ router.delete('/:id', (req, res) => {
             res.status(500).json(err);
         })
 })
-
-// update get one post above to include replies
 
 
 module.exports = router;
