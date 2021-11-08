@@ -17,11 +17,11 @@ Reply.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW
-        },
+        // created_at: {
+        //     type: DataTypes.DATE,
+        //     allowNull: false,
+        //     defaultValue: DataTypes.NOW
+        // },
         post_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
