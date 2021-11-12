@@ -1,0 +1,18 @@
+<section>
+    <div class="d-flex justify-content-between border-bottom border-info pb-2">
+        <h2>Your Posts</h2>
+        <a href="/write-post">
+            <button class="btn btn-light">+ New Post</button>
+        </a>
+        
+    </div>
+    <ul class="list-group m-5">
+
+        {{#each posts as |post|}}
+
+        {{> post-preview post}}
+
+        {{/each}}
+
+    </ul>
+</section>

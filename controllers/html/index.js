@@ -68,8 +68,35 @@ router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
-      }
+    }
       res.render('login');
 });
+
+// Dashboard
+router.get('/dashboard', (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+    Post.findAll({
+        where: {
+            user_id: req.session.user_id
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+        .then(dbUserPost => {
+            const posts = dbUserPost.map(post => post.get({plain: true}));
+            res.render('dashboard', {posts, loggedIn: req.session.loggedIn});
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+})
 
 module.exports = router;
