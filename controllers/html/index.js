@@ -48,17 +48,28 @@ router.get('/single-post/:id', (req, res) => {
         ]
     })
         .then(dbPostData => {
-            if(!dbPostData) {
-                res.status(404).json({message: 'No post found with this id'});
-                return document.location('/');
-            }
-            const post = dbPostData.map(post => post.get({plain: true}));
+            // if(!dbPostData) {
+            //     res.status(404).json({message: 'No post found with this id'});
+            //     return document.location('/');
+            // }
+            const post = dbPostData.get({plain: true});
+            
+            //console.log(post);
             res.render('single-post', { post });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
+});
+
+// login and sign up
+router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+      }
+      res.render('login');
 });
 
 module.exports = router;
