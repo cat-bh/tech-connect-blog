@@ -1,14 +1,14 @@
 <div class="row d-flex">
     <div class="col border-right border-info">
         <h2>Sign in</h2>
-        <form>
+        <form class="login">
             <div class="form-group">
                 <label for="username-signin">Username</label>
-                <input type="text" class="form-control" id="username-signin" placeholder="Enter username">
+                <input type="text" class="form-control" id="username-signin" placeholder="Enter username"/>
             </div>
             <div class="form-group">
                 <label for="password-signin">Password</label>
-                <input type="password" class="form-control" id="password-signin" placeholder="Enter password">
+                <input type="password" class="form-control" id="password-signin" placeholder="Enter password"/>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
 
@@ -17,14 +17,14 @@
 
     <div class="col">
         <h2>Create an account</h2>
-        <form>
+        <form class="signup">
             <div class="form-group">
                 <label for="username-create">Username</label>
-                <input type="text" class="form-control" id="username-create" placeholder="Create username">
+                <input type="text" class="form-control" id="username-create" placeholder="Create username"/>
             </div>
             <div class="form-group">
                 <label for="password-create">Password</label>
-                <input type="password" class="form-control" id="password-create" placeholder="Create password">
+                <input type="password" class="form-control" id="password-create" placeholder="Create password"/>
                 <small id="passwordHelp" class="form-text text-muted">Password must be at least 6 characters long and
                     include numbers</small>
             </div>
@@ -34,3 +34,5 @@
     </div>
 
 </div>
+
+<script src="/javascript/login.js"></script>
