@@ -1,6 +1,8 @@
 <ul class="list-group">
     
-    {{#each post}}
+    {{#each posts as |post|}}
+
     {{> post-preview post}}
+
     {{/each}}
 </ul>
