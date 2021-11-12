@@ -19,17 +19,14 @@
 <h3 class="m-3 text-info">Replies</h3>
 
 <ol class="card list-group list-group-flush">
-    <li class="list-group-item">
-        <p>
-            here is the comment content. Lorem ipsum dolor, sit amet consectetur adipisicing
-            elit. Nisi veniam fugit corporis consectetur. Blanditiis labore laboriosam eaque
-            deserunt rerum nulla. Numquam corrupti animi officia. Amet porro quo quaerat
-            blanditiis incidunt.
-        </p>
-        - username and date
-    </li>
+    {{#each post.replies as |reply|}}
+
+    {{> comment reply}}
+
+    {{/each}}
 </ol>
 
+{{#if loggedIn}}
 <div class="card mt-3">
     <h4 class="card-header">Leave a Reply:</h4>
     <form class="card-body">
@@ -41,3 +38,4 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+{{/if}}
