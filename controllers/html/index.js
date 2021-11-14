@@ -82,6 +82,7 @@ router.get('/dashboard', (req, res) => {
         where: {
             user_id: req.session.user_id
         },
+        attributes: ['id', 'title', 'created_at'],
         include: [
             {
                 model: User,
@@ -97,6 +98,11 @@ router.get('/dashboard', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         })
+});
+
+// Write a post
+router.get('/write-post', (req, res) => {
+    res.render('write-post');
 })
 
 module.exports = router;
