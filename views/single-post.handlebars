@@ -8,11 +8,14 @@
             {{post.body}}
         </p>
 
-        {{!-- <div class="float-right">
+        {{#if currentUser}}
+        <div class="float-right">
             <button type="button" class="btn btn-warning ">Edit</button>
             <button type="button" class="btn btn-danger ">Delete</button>
 
-        </div> --}}
+        </div> 
+        {{/if}}
+        
     </div>
 </article>
 

@@ -53,9 +53,11 @@ router.get('/single-post/:id', (req, res) => {
             //     return document.location('/');
             // }
             const post = dbPostData.get({plain: true});
+
+            // checks if the user logged in is the user who posted this post
+            const currentUser = post.user_id === req.session.user_id;
             
-            //console.log(post);
-            res.render('single-post', { post, loggedIn: req.session.loggedIn });
+            res.render('single-post', { post, currentUser, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);
