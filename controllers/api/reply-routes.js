@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
         Reply.create({
             body: req.body.body,
             post_id: req.body.post_id,
-            user_id: req.body.user_id
+            user_id: req.session.user_id
         })
             .then(dbReply => res.json(dbReply))
             .catch(err => {
