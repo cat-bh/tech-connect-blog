@@ -104,7 +104,25 @@ router.get('/dashboard', (req, res) => {
 
 // Write a post
 router.get('/write-post', (req, res) => {
-    res.render('write-post');
+    res.render('write-post', {loggedIn: req.session.loggedIn});
+});
+
+// edit a post
+router.get('/edit-post/:id', (req, res) => {
+    Post.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: ['title', 'body', 'id']
+    })
+        .then(dbPost => {
+            if(!dbPost) {
+                res.status(404).json({message: 'No post with that id'});
+                return;
+            }
+            const post = dbPost.get({plain: true});
+            res.render('write-post', {post, loggedIn: req.session.loggedIn, editing: true});
+        })
 })
 
 module.exports = router;

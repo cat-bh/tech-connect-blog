@@ -1,18 +1,30 @@
 <div class="card">
-    <h3 class="card-header">Create a new/Edit post</h3>
+    {{#if editing}}
+    <h3 class="card-header">Edit post</h3>
+    {{else}}
+    <h3 class="card-header">Create a new post</h3>
+    {{/if}}
+    
     <form class="card-body" id="publish">
         <div class="form-group">
             <label for="post-title">Title</label>
-            <input type="text" class="form-control" id="post-title" placeholder="Title">
+            <input type="text" class="form-control" id="post-title" placeholder="Title" value="{{post.title}}"/>
         </div>
         <div class="form-group">
             <label for="post-content">Content</label>
-            <textarea class="form-control" id="post-content" rows="4"></textarea>
+            <textarea class="form-control" id="post-content" rows="4">{{post.body}}</textarea>
         </div>
 
+        {{#if editing}}
+        <button type="submit" class="btn btn-outline-info" data-postid="{{post.id}}">Update</button>
+        <script src="/javascript/update-post.js"></script>
+
+        {{else}}
         <button type="submit" class="btn btn-outline-info">Publish</button>
+        
+        <script src="/javascript/submit-post.js"></script>
+        {{/if}}
     </form>
 
 </div>
 
-<script src="/javascript/submit-post.js"></script>

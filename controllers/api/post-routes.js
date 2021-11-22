@@ -82,6 +82,10 @@ router.get('/user/:id', (req, res) => {
 
 // Create a post
 router.post('/', (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
     if (req.session) {
         Post.create({
             title: req.body.title,
@@ -98,6 +102,10 @@ router.post('/', (req, res) => {
 
 // edit post
 router.put('/:id', (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
     Post.update(
         { ...req.body },
         {
@@ -121,6 +129,10 @@ router.put('/:id', (req, res) => {
 
 // delete post
 router.delete('/:id', (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
     Post.destroy({
         where: {
             id: req.params.id
