@@ -14,3 +14,5 @@ A site where tech enthusiasts can share posts and comments. A user must create a
 ## Deployed application
 
 https://stark-reef-71087.herokuapp.com/
+
+![An example of the login page](./screenshot.png)
